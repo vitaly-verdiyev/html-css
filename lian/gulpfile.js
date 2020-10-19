@@ -38,7 +38,7 @@ const paths = {
 const html = () => (
     gulp.src(paths.src.html)
         .pipe(gulp.dest(paths.build.html))
-        // .pipe(gulpIf(isSync, browserSync.stream()))
+        .pipe(gulpIf(isSync, browserSync.stream()))
 );
 
 // ********** S T Y L E S ********** //
@@ -55,7 +55,7 @@ const styles =  () => (
     })))
     .pipe(gulpIf(isDev, sourcemaps.write()))
     .pipe(gulp.dest(paths.build.styles))
-    // .pipe(gulpIf(isSync, browserSync.stream()))
+    .pipe(gulpIf(isSync, browserSync.stream()))
 );
 
 // ********** I M A G E S ********** //
@@ -77,9 +77,10 @@ const jsFiles = [
 ]
 const js = () => (
     gulp.src(jsFiles)
-        .pipe(concat("index.js"))
-        .pipe(minify())
+        // .pipe(concat("index.js"))
+        // .pipe(minify())
         .pipe(gulp.dest(paths.build.scripts))
+        .pipe(gulpIf(isSync, browserSync.stream()))
 );
 
 // ********** W A T C H E R ********** //
